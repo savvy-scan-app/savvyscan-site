@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SavvyScan - Scan product barcodes instantly to see reviews, compare prices, and make smarter shopping decisions right in the aisle.">
-    <meta name="keywords" content="barcode scanner, price comparison, product reviews, smart shopping, iOS app">
+    <meta name="description" content="SavvyScan - Scan supermarket products and compare prices with Amazon to find real savings on your everyday shopping.">
+    <meta name="keywords" content="barcode scanner, price comparison, Amazon comparison, smart shopping, supermarket savings, iOS app">
     <meta name="author" content="SavvyScan">
-    <meta property="og:title" content="SavvyScan - Know What You're Buying. Instantly.">
-    <meta property="og:description" content="Scan any product barcode to see reviews, compare prices, and make smarter shopping decisions.">
+    <meta property="og:title" content="SavvyScan - Find Supermarket Savings with Amazon Price Comparison">
+    <meta property="og:description" content="Scan products at your local supermarket and instantly see if Amazon has a better price.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://savvyscan.app">
-    <title>SavvyScan - Smart Shopping Made Simple</title>
+    <title>SavvyScan - Compare Supermarket Prices with Amazon</title>
 
     <style>
         /* CSS Reset & Base Styles */
@@ -21,13 +21,14 @@
         }
 
         :root {
-            --primary-color: #0066FF;
-            --primary-dark: #0052CC;
-            --text-dark: #1a1a1a;
+            --primary-color: #FF9500;
+            --primary-dark: #E68600;
+            --accent-color: #007AFF;
+            --text-dark: #1d1d1f;
             --text-body: #333;
             --text-light: #666;
             --bg-light: #f9fafb;
-            --bg-gray: #f7f7f7;
+            --bg-gray: #f5f5f7;
             --border-color: #e5e7eb;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
             --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
@@ -73,7 +74,7 @@
         }
 
         a {
-            color: var(--primary-color);
+            color: var(--accent-color);
             text-decoration: none;
             transition: color 0.2s;
         }
@@ -224,7 +225,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
             color: white;
             text-align: center;
             padding: 6rem 0 4rem;
@@ -236,12 +237,14 @@
         .hero h1 {
             color: white;
             margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.95;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .hero-cta {
@@ -249,6 +252,26 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+        }
+
+        .hero .btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .hero .btn-primary:hover {
+            background: rgba(255,255,255,0.95);
+            color: var(--primary-dark);
+        }
+
+        .hero .btn-secondary {
+            border-color: white;
+            color: white;
+        }
+
+        .hero .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
         }
 
         /* Trust Bar */
@@ -259,15 +282,15 @@
 
         .trust-items {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 3rem;
             text-align: center;
         }
 
         .trust-item {
-            flex: 1;
+            flex: 0 1 auto;
             min-width: 150px;
         }
 
@@ -426,37 +449,6 @@
             margin-right: 0.75rem;
         }
 
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .testimonial-stars {
-            color: #fbbf24;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: var(--text-body);
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
         /* FAQ */
         .faq-container {
             max-width: 800px;
@@ -511,7 +503,7 @@
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF9500 0%, #FF6B00 100%);
             color: white;
             text-align: center;
             padding: 5rem 0;
@@ -524,13 +516,22 @@
         .cta-section p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.95;
+        }
+
+        .cta-section .btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .cta-section .btn-primary:hover {
+            background: rgba(255,255,255,0.95);
+            color: var(--primary-dark);
         }
 
         .cta-footer-note {
             margin-top: 1.5rem;
             font-size: 0.875rem;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         /* Footer */
@@ -754,11 +755,11 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container text-center">
-            <h1>Know What You're Buying.<br>Instantly.</h1>
-            <p>Scan any product barcode to see reviews, compare prices,<br>and make smarter shopping decisions—right in the aisle.</p>
+            <h1>Compare Supermarket Prices<br>with Amazon. Instantly.</h1>
+            <p>Scan products at your local store and discover if Amazon has a better price.<br>Turn your everyday shopping into a savings hunt.</p>
             <div class="hero-cta">
                 <a href="#download" class="btn btn-primary btn-large">Download on the App Store</a>
-                <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works ↓</a>
+                <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
             </div>
         </div>
     </section>
@@ -772,14 +773,6 @@
                     <div class="trust-text">Free to Download</div>
                 </div>
                 <div class="trust-item">
-                    <div class="trust-icon">📊</div>
-                    <div class="trust-text">500K+ Scans</div>
-                </div>
-                <div class="trust-item">
-                    <div class="trust-icon">🔒</div>
-                    <div class="trust-text">Privacy-First</div>
-                </div>
-                <div class="trust-item">
                     <div class="trust-icon">📱</div>
                     <div class="trust-text">iOS 15+</div>
                 </div>
@@ -790,31 +783,31 @@
     <!-- Problem Section -->
     <section>
         <div class="container-narrow text-center">
-            <h2>Shopping Shouldn't Be a Guessing Game</h2>
-            <p>Ever stood in a store aisle, unsure if you're getting a good deal? Wondering if that product has terrible reviews you haven't seen? Comparing prices across stores in your head?</p>
-            <p><strong>You deserve better information before you buy.</strong></p>
+            <h2>Stop Overpaying at the Supermarket</h2>
+            <p>You're standing in the grocery aisle, about to buy your favorite cereal, pasta, or laundry detergent. But is Amazon selling it cheaper online?</p>
+            <p><strong>SavvyScan helps you find out in seconds—so you can make smarter decisions about what to buy now and what to order later.</strong></p>
         </div>
     </section>
 
     <!-- How It Works -->
     <section id="how-it-works">
         <div class="container text-center">
-            <h2>Three Taps. Total Clarity.</h2>
+            <h2>Find Savings in Three Simple Steps</h2>
             <div class="steps-grid">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Scan the Barcode</h3>
-                    <p>Point your camera at any UPC code. SavvyScan recognizes it instantly—no typing, no searching.</p>
+                    <p>Point your camera at any product barcode in the store. SavvyScan recognizes it instantly.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Get the Details</h3>
-                    <p>See product reviews, ratings, price history, and where to find better deals nearby or online.</p>
+                    <h3>Enter Store Price</h3>
+                    <p>Enter the price you see on the shelf. SavvyScan instantly fetches the current Amazon price for comparison.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Shop Smarter</h3>
-                    <p>Make confident decisions with all the information right at your fingertips. Save money, every time.</p>
+                    <h3>Find Savings Opportunities</h3>
+                    <p>See the price difference at a glance. Buy now if the store wins, or add to your Amazon cart if online is cheaper.</p>
                 </div>
             </div>
         </div>
@@ -823,7 +816,7 @@
     <!-- Features -->
     <section id="features">
         <div class="container">
-            <h2 class="text-center">Everything You Need to Shop Smart</h2>
+            <h2 class="text-center">Simple Features, Real Savings</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
@@ -832,43 +825,13 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💰</div>
-                    <h3>Price Comparison</h3>
-                    <p>Automatically compare prices across major retailers—online and nearby stores. Never overpay again.</p>
+                    <h3>Amazon Price Comparison</h3>
+                    <p>Compare your local supermarket price with Amazon. Scan a product, enter the store price, and instantly see if Amazon offers a better deal.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>Verified Reviews</h3>
-                    <p>See real customer ratings and reviews aggregated from trusted sources. Know what you're getting.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Price History</h3>
-                    <p>Track how prices have changed over time. Buy when the price is right, not when it's inflated.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">❤️</div>
-                    <h3>Save Favorites</h3>
-                    <p>Build wishlists and get alerts when prices drop on products you're watching. Never miss a deal.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📴</div>
-                    <h3>Offline Mode</h3>
-                    <p>Already scanned a product? Access your recent scans even without internet. Perfect for basement stores.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Product Alternatives</h3>
-                    <p>Discover similar products that might be better quality or better priced. Explore your options.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🕐</div>
-                    <h3>Barcode History</h3>
-                    <p>Keep a running history of everything you've scanned. Perfect for comparison shopping across multiple stores.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Privacy-Focused</h3>
-                    <p>Your scans stay private. We don't sell your data or track what you're shopping for. Ever.</p>
+                    <div class="feature-icon">📊</div>
+                    <h3>Dashboard Tracking</h3>
+                    <p>Add scanned items to your dashboard to track prices over time. Free plan: 1 tracked item. Premium plan: 30 tracked items.</p>
                 </div>
             </div>
         </div>
@@ -877,71 +840,50 @@
     <!-- Pricing -->
     <section id="pricing">
         <div class="container">
-            <h2 class="text-center">Start Free. Upgrade When You're Ready.</h2>
+            <h2 class="text-center">Start Free. Upgrade for More Scans.</h2>
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Free Plan</h3>
-                    <p class="pricing-subtitle">Perfect for casual shoppers</p>
+                    <p class="pricing-subtitle">Perfect for occasional shoppers</p>
                     <div class="price">$0<span class="price-period">/forever</span></div>
                     <ul class="pricing-features">
-                        <li>Unlimited barcode scans</li>
+                        <li>10 free scans daily</li>
+                        <li>1 tracked item on dashboard</li>
+                        <li>Amazon price comparison</li>
                         <li>Basic product information</li>
-                        <li>Price comparison (3 retailers)</li>
-                        <li>Customer reviews</li>
-                        <li>Recent scan history (last 10)</li>
                     </ul>
                     <a href="#download" class="btn btn-secondary">Download Free</a>
                 </div>
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Most Popular</div>
                     <h3>SavvyScan Premium</h3>
-                    <p class="pricing-subtitle">For serious savvy shoppers</p>
+                    <p class="pricing-subtitle">For serious savers</p>
                     <div class="price">$4.99<span class="price-period">/month</span></div>
                     <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 1rem;">or $39.99/year (Save 33%)</p>
                     <ul class="pricing-features">
-                        <li>Everything in Free, plus:</li>
-                        <li>Price comparison (20+ retailers)</li>
-                        <li>Price drop alerts</li>
-                        <li>Full price history charts</li>
-                        <li>Unlimited scan history</li>
-                        <li>Product alternatives</li>
+                        <li>Unlimited scans</li>
+                        <li>30 tracked items on dashboard</li>
+                        <li>Amazon price comparison</li>
                         <li>Ad-free experience</li>
                         <li>Priority support</li>
                     </ul>
-                    <a href="#download" class="btn btn-primary">Start 7-Day Free Trial</a>
-                    <p class="mt-3" style="font-size: 0.875rem; color: var(--text-light);">Try Premium free for 7 days. Cancel anytime directly in the App Store. No credit card required for free version.</p>
+                    <a href="#download" class="btn btn-primary">Start Free Trial</a>
+                    <p class="mt-3" style="font-size: 0.875rem; color: var(--text-light);">Cancel anytime through the App Store.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Social Proof -->
     <section>
         <div class="container">
-            <h2 class="text-center">Loved by Smart Shoppers</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial">
-                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">"I saved $47 on a kitchen appliance by scanning it at three stores. The price comparison feature alone paid for Premium 10x over."</p>
-                    <p class="testimonial-author">— Jennifer, Chicago</p>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">"No more buyer's remorse! I check every product before I buy. The review aggregation is incredibly helpful."</p>
-                    <p class="testimonial-author">— Michael, Austin</p>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">"As someone who does a lot of price research, this app is a game-changer. The price history graphs show when products are actually on sale."</p>
-                    <p class="testimonial-author">— Sarah, Seattle</p>
-                </div>
-            </div>
-            <p class="text-center mt-4" style="color: var(--text-light);">Join 100,000+ shoppers making smarter decisions every day.</p>
+            <h2 class="text-center">Join Early Adopters Discovering Smarter Shopping</h2>
+            <p class="text-center" style="color: var(--text-light); max-width: 600px; margin: 2rem auto;">SavvyScan is designed for savvy shoppers who want to make every dollar count. Start comparing prices today and discover where your supermarket really stacks up against Amazon.</p>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section>
+    <section id="faq">
         <div class="container">
             <h2 class="text-center">Questions? We've Got Answers.</h2>
             <div class="faq-container">
@@ -952,62 +894,72 @@
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>Yes! SavvyScan is free to download and use. The free version includes unlimited barcode scanning, basic product information, price comparison across 3 retailers, and customer reviews. You can use it forever without paying a cent. Premium is optional for users who want advanced features like price alerts, extended price comparison, and ad-free experience.</p>
+                        <p>Yes! SavvyScan is free to download and use. The free version includes 10 scans per day, 1 tracked item on your dashboard, and Amazon price comparison. Premium is optional for users who want unlimited scans, more tracked items, and an ad-free experience.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq2" class="faq-toggle">
                     <label for="faq2" class="faq-question">
-                        What types of products can I scan?
+                        How does price comparison work?
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>SavvyScan works with any product that has a standard UPC barcode (the vertical lines you see on most packaged goods). This includes groceries, electronics, books, toys, health & beauty products, and more. We currently support products available in the US market.</p>
+                        <p>It's simple: scan a product barcode, manually enter the price you see at your local store, and SavvyScan instantly shows you the current Amazon price. You'll see the difference at a glance, helping you decide whether to buy now or order online later.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq3" class="faq-toggle">
                     <label for="faq3" class="faq-question">
-                        Do you sell my shopping data?
+                        What types of products can I scan?
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>Never. Your privacy is our top priority. We do not sell, rent, or share your personal information or scanning history with third parties for marketing purposes. Your scans are yours alone. Read our full <a href="#privacy">Privacy Policy</a> for details.</p>
+                        <p>SavvyScan is designed for everyday supermarket shopping. You can scan groceries, health items, hygiene products, and other items you typically find at your local supermarket. The app works with any product that has a standard UPC barcode.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq4" class="faq-toggle">
                     <label for="faq4" class="faq-question">
-                        How accurate are the prices?
+                        Will I always save money?
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>We pull prices in real-time from retailer APIs and verified sources. Prices are typically updated multiple times per day. However, in-store prices may vary from online prices, and prices can change rapidly. We recommend using SavvyScan as a guide, and always verify the final price at checkout.</p>
+                        <p>Not always—sometimes your local store has the better price! That's the whole point of comparison. SavvyScan helps you discover savings opportunities, but it's more like a savings hunt. You'll find deals when they exist, and you'll shop smarter overall.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq5" class="faq-toggle">
                     <label for="faq5" class="faq-question">
-                        Can I use this app in stores?
+                        How accurate are the Amazon prices?
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>Absolutely! SavvyScan is designed for in-store use. Just open the app, point your camera at a barcode, and get instant information. Recent scans are cached so you can review them even if you lose signal in the store.</p>
+                        <p>We pull prices in real-time from Amazon. Prices are typically updated multiple times per day. However, Amazon prices can change rapidly, so we recommend using SavvyScan as a guide and always verifying the final price before making your purchase decision.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq6" class="faq-toggle">
                     <label for="faq6" class="faq-question">
-                        How do I cancel my Premium subscription?
+                        Can I use this app in stores?
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>Premium subscriptions are managed entirely through your Apple ID and the App Store. To cancel: Open Settings > [Your Name] > Subscriptions > SavvyScan Premium > Cancel Subscription. You'll retain Premium access through the end of your billing period. You can resubscribe anytime.</p>
+                        <p>Absolutely! SavvyScan is designed for in-store use. Just open the app, point your camera at a barcode, enter the shelf price, and get instant comparison information.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq7" class="faq-toggle">
                     <label for="faq7" class="faq-question">
+                        How do I cancel my Premium subscription?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Premium subscriptions are managed entirely through your Apple ID and the App Store. To cancel: Open Settings > [Your Name] > Subscriptions > SavvyScan Premium > Cancel Subscription. You'll retain Premium access through the end of your billing period.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq8" class="faq-toggle">
+                    <label for="faq8" class="faq-question">
                         Which iPhones are supported?
                         <span class="faq-icon">▼</span>
                     </label>
@@ -1016,13 +968,13 @@
                     </div>
                 </div>
                 <div class="faq-item">
-                    <input type="checkbox" id="faq8" class="faq-toggle">
-                    <label for="faq8" class="faq-question">
+                    <input type="checkbox" id="faq9" class="faq-toggle">
+                    <label for="faq9" class="faq-question">
                         What if I have a problem or need help?
                         <span class="faq-icon">▼</span>
                     </label>
                     <div class="faq-answer">
-                        <p>We're here to help! Visit our <a href="#support">Support page</a> to contact our support team via email or our contact form. Premium subscribers receive priority support with responses typically within 24 hours.</p>
+                        <p>We're here to help! Visit our Support section below to contact our support team via email. Premium subscribers receive priority support with responses typically within 24 hours.</p>
                     </div>
                 </div>
             </div>
@@ -1032,10 +984,10 @@
     <!-- Final CTA -->
     <section class="cta-section" id="download">
         <div class="container text-center">
-            <h2>Ready to Shop Smarter?</h2>
-            <p>Download SavvyScan free today and start making<br>better buying decisions in seconds.</p>
+            <h2>Ready to Start Saving?</h2>
+            <p>Download SavvyScan free today and turn your<br>supermarket trips into savings opportunities.</p>
             <a href="#" class="btn btn-primary btn-large">Download on the App Store</a>
-            <p class="cta-footer-note">No credit card required • Free forever • Cancel Premium anytime</p>
+            <p class="cta-footer-note">Free to download • 10 scans daily • Upgrade anytime</p>
         </div>
     </section>
 
@@ -1121,10 +1073,10 @@
     <section id="privacy" class="legal-page">
         <div class="legal-content">
             <h1>Privacy Policy</h1>
-            <p class="legal-date">Last Updated: November 7, 2025 | Effective Date: November 7, 2025</p>
+            <p class="legal-date">Last Updated: November 8, 2025 | Effective Date: November 8, 2025</p>
 
             <h2>Introduction</h2>
-            <p>SavvyScan ("we," "our," or "us") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our SavvyScan mobile application (the "App") on iOS devices.</p>
+            <p>SavvyScan ("we," "our," or "us") is committed to transparency about how we collect and use your information. This Privacy Policy explains our data practices when you use our SavvyScan mobile application (the "App") on iOS devices.</p>
             <p>Please read this Privacy Policy carefully. By downloading, installing, or using the App, you agree to the terms of this Privacy Policy. If you do not agree with our practices, please do not use the App.</p>
             <p>We reserve the right to modify this Privacy Policy at any time. Changes will be effective when posted in the App and on our website. Your continued use after changes constitutes acceptance of the updated policy.</p>
 
@@ -1142,8 +1094,8 @@
             <p><strong>User-Generated Content:</strong></p>
             <ul>
                 <li>Products you scan (UPC codes)</li>
-                <li>Products you save to favorites or wishlists</li>
-                <li>Search queries</li>
+                <li>Store prices you manually enter</li>
+                <li>Products you add to your dashboard for tracking</li>
                 <li>Feedback and support communications</li>
             </ul>
 
@@ -1154,54 +1106,71 @@
             </ul>
 
             <h3>1.2 Information Automatically Collected</h3>
-            <p><strong>Usage Data:</strong> We collect analytics information about how you interact with the App, including features used, scan frequency, time spent in the App, navigation patterns, settings, device type, operating system version, app version, crash reports, error logs, and IP address.</p>
+            <p><strong>Usage Data:</strong> We collect analytics information about how you interact with the App, including:</p>
+            <ul>
+                <li>Features used and scan frequency</li>
+                <li>Products scanned and price comparisons performed</li>
+                <li>Time spent in the App and navigation patterns</li>
+                <li>Device type, operating system version, app version</li>
+                <li>Crash reports, error logs, and IP address</li>
+            </ul>
 
             <p><strong>Device Information:</strong> Device model, iOS version, unique device identifiers (for analytics and crash reporting only), screen size and resolution (for UI optimization).</p>
-
-            <p><strong>Location Information:</strong> We do NOT collect precise GPS location. However, we may infer your general region (city or state level) from your IP address to provide relevant local retailer prices. This location information is not stored long-term.</p>
 
             <h3>1.3 Information We Do Not Collect</h3>
             <ul>
                 <li>We do not access your camera roll or photo library</li>
                 <li>We do not access your contacts</li>
                 <li>We do not collect biometric data</li>
-                <li>We do not track you across other apps or websites</li>
+                <li>We do not collect precise GPS location data</li>
                 <li>We do not collect information about children (see Section 8)</li>
             </ul>
 
             <h2>2. How We Use Your Information</h2>
             <p>We use the information we collect to:</p>
             <ul>
-                <li>Provide and improve the App</li>
+                <li>Provide and improve the App functionality</li>
                 <li>Enable barcode scanning and product recognition</li>
-                <li>Display product information, reviews, and prices</li>
-                <li>Maintain your scan history and saved products</li>
-                <li>Sync your data across devices (if logged in)</li>
+                <li>Display Amazon price comparisons</li>
+                <li>Maintain your dashboard tracked items (limited by plan)</li>
                 <li>Provide customer support</li>
                 <li>Verify your Premium subscription status</li>
-                <li>Understand how users interact with the App</li>
-                <li>Identify and fix bugs and crashes</li>
-                <li>Comply with legal obligations</li>
-                <li>Enforce our Terms of Use</li>
-                <li>Protect against fraud, abuse, or illegal activity</li>
+                <li>Understand how users interact with the App and identify bugs</li>
+                <li>Comply with legal obligations and enforce our Terms of Use</li>
             </ul>
 
             <h2>3. How We Share Your Information</h2>
-            <p><strong>We do not sell, rent, or trade your personal information to third parties for marketing purposes.</strong></p>
-            <p>We may share your information only in the following limited circumstances:</p>
+            <p><strong>Important Notice:</strong> We may share aggregated, anonymized usage data and analytics with third parties. In the future, we may also share or sell anonymized user data to third parties for business purposes. Any such sharing will be disclosed in an updated version of this Privacy Policy.</p>
 
-            <p><strong>Service Providers:</strong> We work with trusted third-party companies to help operate the App, including cloud hosting providers, analytics services, and product data providers. These service providers have access only to the information necessary to perform their functions and are contractually obligated to protect your data.</p>
+            <p>We may share your information in the following circumstances:</p>
+
+            <p><strong>Service Providers:</strong> We work with trusted third-party companies to help operate the App, including cloud hosting providers, analytics services, Amazon product data APIs, and email service providers. These service providers have access only to the information necessary to perform their functions and are contractually obligated to protect your data.</p>
+
+            <p><strong>Business Partners:</strong> We may share anonymized, aggregated data about product scans, price comparisons, and shopping patterns with business partners and third parties. This data cannot be used to identify you personally.</p>
 
             <p><strong>Legal Requirements:</strong> We may disclose your information if required by law, such as in response to a court order, subpoena, or legal process, to comply with government requests, to enforce our Terms of Use, or to protect rights, property, or safety.</p>
 
-            <p><strong>Business Transfers:</strong> If SavvyScan is acquired by or merged with another company, your information may be transferred as part of that transaction. We will notify you of any change in ownership.</p>
+            <p><strong>Business Transfers:</strong> If SavvyScan is acquired by or merged with another company, your information may be transferred as part of that transaction. We will notify you of any change in ownership or use of your personal information.</p>
 
             <h2>4. Data Retention</h2>
-            <p>We retain your information for as long as your account is active or as needed to provide you services. Account data is retained until you delete your account. Free users' scan history includes the 10 most recent scans; Premium users have unlimited scan history retained until account deletion.</p>
-            <p>You can delete your account and all associated data at any time through the App (Settings > Account > Delete Account) or by contacting us at support@savvyscan.app.</p>
+            <p>We retain your information as follows:</p>
+            <ul>
+                <li>Account data is retained until you delete your account</li>
+                <li>Free users: Recent scans (limited functionality)</li>
+                <li>Premium users: Dashboard tracked items (up to 30 items) retained until account deletion</li>
+                <li>Analytics and usage data may be retained indefinitely in anonymized form</li>
+            </ul>
+            <p>You can delete your account and all associated personal data at any time through the App (Settings > Account > Delete Account) or by contacting us at support@savvyscan.app.</p>
 
             <h2>5. Data Security</h2>
-            <p>We implement reasonable administrative, technical, and physical security measures to protect your information against unauthorized access, alteration, disclosure, or destruction, including encryption of data in transit (TLS/SSL), encryption of sensitive data at rest, secure authentication mechanisms, regular security assessments, and limited employee access to personal data.</p>
+            <p>We implement reasonable administrative, technical, and physical security measures to protect your information against unauthorized access, alteration, disclosure, or destruction, including:</p>
+            <ul>
+                <li>Encryption of data in transit (TLS/SSL)</li>
+                <li>Encryption of sensitive data at rest</li>
+                <li>Secure authentication mechanisms</li>
+                <li>Regular security assessments</li>
+                <li>Limited employee access to personal data</li>
+            </ul>
             <p>However, no method of electronic storage or internet transmission is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
 
             <h2>6. Your Privacy Rights</h2>
@@ -1211,13 +1180,18 @@
                 <li><strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
                 <li><strong>Deletion:</strong> Request deletion of your account and personal data</li>
                 <li><strong>Portability:</strong> Request a copy of your data in a machine-readable format</li>
-                <li><strong>Opt-Out:</strong> Opt out of marketing communications</li>
+                <li><strong>Opt-Out:</strong> Opt out of certain data collection or marketing communications</li>
             </ul>
             <p>To exercise these rights, contact us at support@savvyscan.app or use the in-app account settings.</p>
 
             <h2>7. Third-Party Services</h2>
-            <p>The App integrates with third-party services for certain functionality, including Apple App Store for subscription processing and payment (governed by Apple's Privacy Policy) and product data providers for product information, pricing, and reviews.</p>
-            <p>The App may contain links to third-party websites or retailers. We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies.</p>
+            <p>The App integrates with third-party services for certain functionality:</p>
+            <ul>
+                <li>Apple App Store for subscription processing and payment (governed by Apple's Privacy Policy)</li>
+                <li>Amazon Product Advertising API for product information and pricing</li>
+                <li>Analytics providers for app performance and usage tracking</li>
+            </ul>
+            <p>The App may contain links to third-party websites including Amazon. We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies.</p>
 
             <h2>8. Children's Privacy</h2>
             <p>SavvyScan is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13 without parental consent, we will take steps to delete that information as quickly as possible.</p>
@@ -1228,7 +1202,7 @@
             <ul>
                 <li><strong>Right to Know:</strong> Request information about the categories and specific pieces of personal information we've collected</li>
                 <li><strong>Right to Delete:</strong> Request deletion of your personal information, subject to certain exceptions</li>
-                <li><strong>Right to Opt-Out of Sale:</strong> We do not sell your personal information</li>
+                <li><strong>Right to Opt-Out of Sale:</strong> We may sell anonymized data in the future. You can opt out by contacting us.</li>
                 <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights</li>
             </ul>
             <p>To exercise these rights, email support@savvyscan.app with "CCPA Request" in the subject line.</p>
@@ -1244,17 +1218,12 @@
             <p>If you have questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us:</p>
             <p>
                 <strong>Email:</strong> support@savvyscan.app<br>
-                <strong>Website:</strong> <a href="#support">savvyscan.app/support</a><br>
-                <strong>Mailing Address:</strong> [INSERT YOUR BUSINESS MAILING ADDRESS HERE]
+                <strong>Website:</strong> <a href="#support">savvyscan.app/support</a>
             </p>
             <p>We will respond to your inquiry within 30 days.</p>
 
             <h2>Acknowledgment</h2>
             <p>By using SavvyScan, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.</p>
-
-            <p style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-light); border-left: 4px solid var(--primary-color); font-size: 0.875rem;">
-                <strong>Legal Disclaimer:</strong> This Privacy Policy template is provided for informational purposes only and does not constitute legal advice. Before publishing, this document must be reviewed, customized, and approved by a qualified attorney familiar with iOS App Store requirements, state privacy laws (including CCPA, Virginia CDPA, etc.), federal laws (including COPPA, CAN-SPAM, etc.), and international laws if applicable (GDPR, PIPEDA, etc.). Ensure all statements accurately reflect your actual practices and add your business mailing address before publishing.
-            </p>
         </div>
     </section>
 
@@ -1262,7 +1231,7 @@
     <section id="terms" class="legal-page">
         <div class="legal-content">
             <h1>Terms of Use</h1>
-            <p class="legal-date">Last Updated: November 7, 2025 | Effective Date: November 7, 2025</p>
+            <p class="legal-date">Last Updated: November 8, 2025 | Effective Date: November 8, 2025</p>
 
             <h2>Agreement to Terms</h2>
             <p>These Terms of Use ("Terms") constitute a legally binding agreement between you and SavvyScan ("Company," "we," "our," or "us") regarding your use of the SavvyScan mobile application (the "App") on iOS devices.</p>
@@ -1294,14 +1263,25 @@
 
             <h2>2. Accounts and Registration</h2>
             <h3>2.1 Account Creation</h3>
-            <p>To access certain features, you must create an account. You agree to provide accurate, current, and complete information; maintain and update your information to keep it accurate; maintain the security and confidentiality of your password; notify us immediately of any unauthorized use of your account; and be responsible for all activities under your account.</p>
+            <p>To access certain features, you must create an account. You agree to:</p>
+            <ul>
+                <li>Provide accurate, current, and complete information</li>
+                <li>Maintain and update your information to keep it accurate</li>
+                <li>Maintain the security and confidentiality of your password</li>
+                <li>Notify us immediately of any unauthorized use of your account</li>
+                <li>Be responsible for all activities under your account</li>
+            </ul>
 
             <h3>2.2 Account Termination</h3>
             <p>We reserve the right to suspend or terminate your account at any time if you violate these Terms, engage in fraudulent, abusive, or illegal activity, we are required to do so by law, or we discontinue the App or service. You may delete your account at any time through the App settings.</p>
 
             <h2>3. Subscriptions and Payments</h2>
             <h3>3.1 Subscription Plans</h3>
-            <p>SavvyScan offers both a free version and a Premium subscription with enhanced features. Subscription details and pricing are described in the App and on our website.</p>
+            <p>SavvyScan offers both a free version and a Premium subscription:</p>
+            <ul>
+                <li><strong>Free Plan:</strong> 10 scans per day, 1 tracked item on dashboard, Amazon price comparison, basic product information</li>
+                <li><strong>Premium Plan:</strong> $4.99/month or $39.99/year - Unlimited scans, 30 tracked items on dashboard, Amazon price comparison, ad-free experience, priority support</li>
+            </ul>
 
             <h3>3.2 Payment Processing</h3>
             <p>All subscription purchases are processed through the Apple App Store and are subject to Apple's payment terms. We do not directly process payments or store your payment information.</p>
@@ -1323,17 +1303,19 @@
 
             <h2>4. Product Information and Pricing</h2>
             <h3>4.1 Information Accuracy</h3>
-            <p>The App provides product information, pricing, reviews, and other data obtained from third-party sources. While we strive for accuracy, we do not guarantee that all information is accurate, complete, current, or error-free.</p>
-            <p><strong>PRODUCT PRICES, AVAILABILITY, AND DESCRIPTIONS ARE PROVIDED FOR INFORMATIONAL PURPOSES ONLY. ALWAYS VERIFY PRODUCT DETAILS AND FINAL PRICES WITH THE RETAILER BEFORE MAKING A PURCHASE.</strong></p>
+            <p>The App provides Amazon price comparison and product information obtained from third-party sources. While we strive for accuracy, we do not guarantee that all information is accurate, complete, current, or error-free.</p>
+            <p><strong>PRODUCT PRICES AND AVAILABILITY ARE PROVIDED FOR INFORMATIONAL PURPOSES ONLY. ALWAYS VERIFY PRODUCT DETAILS AND FINAL PRICES WITH THE RETAILER BEFORE MAKING A PURCHASE. SAVVYSCAN DOES NOT GUARANTEE SAVINGS ON EVERY PRODUCT.</strong></p>
 
             <h3>4.2 No Purchase Guarantee</h3>
-            <p>The App is an informational tool. We do not sell products, fulfill orders, or guarantee product availability. We are not responsible for any purchases you make based on information from the App.</p>
+            <p>The App is an informational comparison tool. We do not sell products, fulfill orders, or guarantee product availability or pricing. We are not responsible for any purchases you make based on information from the App.</p>
 
             <h3>4.3 Third-Party Retailers</h3>
-            <p>The App may provide links to third-party retailer websites and stores. We are not responsible for the content, policies, or practices of third parties. Transactions with third parties are solely between you and that third party.</p>
+            <p>The App may provide links to Amazon and other third-party retailer websites. We are not responsible for the content, policies, or practices of third parties. Transactions with third parties are solely between you and that third party.</p>
 
             <h2>5. Intellectual Property Rights</h2>
-            <p>The App and all content, features, and functionality are owned by SavvyScan or our licensors and are protected by copyright, trademark, patent, and other intellectual property laws. SavvyScan, the SavvyScan logo, and other marks are trademarks of SavvyScan. You may not use these marks without our prior written permission. Apple, iPhone, App Store, and related marks are trademarks of Apple Inc.</p>
+            <p>The App and all content, features, and functionality are owned by SavvyScan or our licensors and are protected by copyright, trademark, patent, and other intellectual property laws.</p>
+            <p>SavvyScan, the SavvyScan logo, and other marks are trademarks of SavvyScan. You may not use these marks without our prior written permission.</p>
+            <p>Apple, iPhone, App Store, and related marks are trademarks of Apple Inc. Amazon and related marks are trademarks of Amazon.com, Inc.</p>
 
             <h2>6. Disclaimers and Limitations of Liability</h2>
             <h3>6.1 "AS IS" and "AS AVAILABLE"</h3>
@@ -1344,14 +1326,15 @@
             <p>TO THE EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATED TO THE APP WILL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR $100, WHICHEVER IS GREATER.</p>
 
             <h2>7. Termination</h2>
-            <p>You may stop using the App and delete your account at any time through the App settings. We may suspend or terminate your access to the App at any time, with or without notice, for any reason. Upon termination, your right to use the App immediately ceases, and we may delete your account and User Data (subject to data retention obligations).</p>
+            <p>You may stop using the App and delete your account at any time through the App settings. We may suspend or terminate your access to the App at any time, with or without notice, for any reason, including violation of these Terms.</p>
+            <p>Upon termination, your right to use the App immediately ceases, and we may delete your account and user data (subject to data retention obligations).</p>
 
             <h2>8. Dispute Resolution</h2>
             <h3>8.1 Informal Resolution</h3>
             <p>Before filing a formal claim, you agree to contact us at support@savvyscan.app to attempt to resolve any dispute informally.</p>
 
             <h3>8.2 Governing Law</h3>
-            <p>These Terms are governed by and construed in accordance with the laws of [INSERT YOUR STATE/JURISDICTION], without regard to conflict of law principles.</p>
+            <p>These Terms are governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles.</p>
 
             <h2>9. Apple-Specific Terms</h2>
             <p>You acknowledge that:</p>
@@ -1367,16 +1350,11 @@
             <p>If you have questions about these Terms, please contact us:</p>
             <p>
                 <strong>Email:</strong> support@savvyscan.app<br>
-                <strong>Website:</strong> <a href="#support">savvyscan.app/support</a><br>
-                <strong>Mailing Address:</strong> [INSERT YOUR BUSINESS MAILING ADDRESS HERE]
+                <strong>Website:</strong> <a href="#support">savvyscan.app/support</a>
             </p>
 
             <h2>Acknowledgment</h2>
             <p>By using SavvyScan, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use.</p>
-
-            <p style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-light); border-left: 4px solid var(--primary-color); font-size: 0.875rem;">
-                <strong>Legal Disclaimer:</strong> This Terms of Use template is provided for informational purposes only and does not constitute legal advice. Before publishing, have these terms reviewed and customized by a licensed attorney. Ensure arbitration provisions comply with state law, add your business mailing address, verify governing law and venue match your business location, confirm accuracy regarding subscription terms and Apple's requirements, and update regularly as your app features or business practices change. DO NOT publish this template without legal review.
-            </p>
         </div>
     </section>
 
@@ -1419,8 +1397,8 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 SavvyScan. All rights reserved.<br>
-                iPhone and App Store are trademarks of Apple Inc.</p>
-                <p style="margin-top: 1rem; opacity: 0.8;">Made with care for smart shoppers everywhere.</p>
+                iPhone and App Store are trademarks of Apple Inc. Amazon is a trademark of Amazon.com, Inc.</p>
+                <p style="margin-top: 1rem; opacity: 0.8;">Made for smart shoppers.</p>
             </div>
         </div>
     </footer>
