@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SavvyScan - Scan product barcodes instantly to see reviews, compare prices, and make smarter shopping decisions right in the aisle.">
+    <meta name="keywords" content="barcode scanner, price comparison, product reviews, smart shopping, iOS app">
+    <meta name="author" content="SavvyScan">
+    <meta property="og:title" content="SavvyScan - Know What You're Buying. Instantly.">
+    <meta property="og:description" content="Scan any product barcode to see reviews, compare prices, and make smarter shopping decisions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://savvyscan.app">
+    <title>SavvyScan - Smart Shopping Made Simple</title>
+
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0066FF;
+            --primary-dark: #0052CC;
+            --text-dark: #1a1a1a;
+            --text-body: #333;
+            --text-light: #666;
+            --bg-light: #f9fafb;
+            --bg-gray: #f7f7f7;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --radius-lg: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-body);
+            background: #fff;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-dark);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .container-narrow {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            font-weight: 500;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        #mobile-menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 100%;
+                max-width: 300px;
+                height: calc(100vh - 60px);
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: var(--shadow-lg);
+                transition: right 0.3s ease;
+                align-items: flex-start;
+            }
+
+            #mobile-menu-toggle:checked ~ .nav-links {
+                right: 0;
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            min-height: 48px;
+            line-height: 1.2;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-large {
+            padding: 1.125rem 2.5rem;
+            font-size: 1.125rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 0 4rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--bg-gray);
+            padding: 2rem 0;
+        }
+
+        .trust-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .trust-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .trust-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-text {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        /* Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-flex;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-subtitle {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 1rem 0;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-right: 0.75rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-body);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-toggle {
+            display: none;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-toggle:checked + .faq-question + .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-toggle:checked + .faq-question .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta-section h2 {
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-footer-note {
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        /* Legal Pages */
+        .legal-page {
+            padding: 4rem 0;
+        }
+
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .legal-content h1 {
+            margin-bottom: 1rem;
+        }
+
+        .legal-content h2 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-content h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-content p, .legal-content li {
+            color: var(--text-body);
+            line-height: 1.8;
+        }
+
+        .legal-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-date {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-checkbox input {
+            width: auto;
+        }
+
+        /* Support Section */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .support-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .support-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0 3rem;
+                min-height: 80vh;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .steps-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo">SavvyScan</a>
+            <label for="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle menu">☰</label>
+            <input type="checkbox" id="mobile-menu-toggle">
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#download" class="btn btn-primary">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container text-center">
+            <h1>Know What You're Buying.<br>Instantly.</h1>
+            <p>Scan any product barcode to see reviews, compare prices,<br>and make smarter shopping decisions—right in the aisle.</p>
+            <div class="hero-cta">
+                <a href="#download" class="btn btn-primary btn-large">Download on the App Store</a>
+                <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works ↓</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="container">
+            <div class="trust-items">
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <div class="trust-text">Free to Download</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">📊</div>
+                    <div class="trust-text">500K+ Scans</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-text">Privacy-First</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">📱</div>
+                    <div class="trust-text">iOS 15+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section>
+        <div class="container-narrow text-center">
+            <h2>Shopping Shouldn't Be a Guessing Game</h2>
+            <p>Ever stood in a store aisle, unsure if you're getting a good deal? Wondering if that product has terrible reviews you haven't seen? Comparing prices across stores in your head?</p>
+            <p><strong>You deserve better information before you buy.</strong></p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="container text-center">
+            <h2>Three Taps. Total Clarity.</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Scan the Barcode</h3>
+                    <p>Point your camera at any UPC code. SavvyScan recognizes it instantly—no typing, no searching.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get the Details</h3>
+                    <p>See product reviews, ratings, price history, and where to find better deals nearby or online.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Shop Smarter</h3>
+                    <p>Make confident decisions with all the information right at your fingertips. Save money, every time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="container">
+            <h2 class="text-center">Everything You Need to Shop Smart</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning-Fast Scanning</h3>
+                    <p>Instant barcode recognition powered by advanced computer vision. No more struggling with slow, unreliable scanners.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Price Comparison</h3>
+                    <p>Automatically compare prices across major retailers—online and nearby stores. Never overpay again.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Verified Reviews</h3>
+                    <p>See real customer ratings and reviews aggregated from trusted sources. Know what you're getting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Price History</h3>
+                    <p>Track how prices have changed over time. Buy when the price is right, not when it's inflated.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Save Favorites</h3>
+                    <p>Build wishlists and get alerts when prices drop on products you're watching. Never miss a deal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📴</div>
+                    <h3>Offline Mode</h3>
+                    <p>Already scanned a product? Access your recent scans even without internet. Perfect for basement stores.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Product Alternatives</h3>
+                    <p>Discover similar products that might be better quality or better priced. Explore your options.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🕐</div>
+                    <h3>Barcode History</h3>
+                    <p>Keep a running history of everything you've scanned. Perfect for comparison shopping across multiple stores.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Privacy-Focused</h3>
+                    <p>Your scans stay private. We don't sell your data or track what you're shopping for. Ever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="text-center">Start Free. Upgrade When You're Ready.</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free Plan</h3>
+                    <p class="pricing-subtitle">Perfect for casual shoppers</p>
+                    <div class="price">$0<span class="price-period">/forever</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited barcode scans</li>
+                        <li>Basic product information</li>
+                        <li>Price comparison (3 retailers)</li>
+                        <li>Customer reviews</li>
+                        <li>Recent scan history (last 10)</li>
+                    </ul>
+                    <a href="#download" class="btn btn-secondary">Download Free</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>SavvyScan Premium</h3>
+                    <p class="pricing-subtitle">For serious savvy shoppers</p>
+                    <div class="price">$4.99<span class="price-period">/month</span></div>
+                    <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 1rem;">or $39.99/year (Save 33%)</p>
+                    <ul class="pricing-features">
+                        <li>Everything in Free, plus:</li>
+                        <li>Price comparison (20+ retailers)</li>
+                        <li>Price drop alerts</li>
+                        <li>Full price history charts</li>
+                        <li>Unlimited scan history</li>
+                        <li>Product alternatives</li>
+                        <li>Ad-free experience</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#download" class="btn btn-primary">Start 7-Day Free Trial</a>
+                    <p class="mt-3" style="font-size: 0.875rem; color: var(--text-light);">Try Premium free for 7 days. Cancel anytime directly in the App Store. No credit card required for free version.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+        <div class="container">
+            <h2 class="text-center">Loved by Smart Shoppers</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I saved $47 on a kitchen appliance by scanning it at three stores. The price comparison feature alone paid for Premium 10x over."</p>
+                    <p class="testimonial-author">— Jennifer, Chicago</p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"No more buyer's remorse! I check every product before I buy. The review aggregation is incredibly helpful."</p>
+                    <p class="testimonial-author">— Michael, Austin</p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"As someone who does a lot of price research, this app is a game-changer. The price history graphs show when products are actually on sale."</p>
+                    <p class="testimonial-author">— Sarah, Seattle</p>
+                </div>
+            </div>
+            <p class="text-center mt-4" style="color: var(--text-light);">Join 100,000+ shoppers making smarter decisions every day.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="container">
+            <h2 class="text-center">Questions? We've Got Answers.</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <input type="checkbox" id="faq1" class="faq-toggle">
+                    <label for="faq1" class="faq-question">
+                        Is SavvyScan really free?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Yes! SavvyScan is free to download and use. The free version includes unlimited barcode scanning, basic product information, price comparison across 3 retailers, and customer reviews. You can use it forever without paying a cent. Premium is optional for users who want advanced features like price alerts, extended price comparison, and ad-free experience.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq2" class="faq-toggle">
+                    <label for="faq2" class="faq-question">
+                        What types of products can I scan?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>SavvyScan works with any product that has a standard UPC barcode (the vertical lines you see on most packaged goods). This includes groceries, electronics, books, toys, health & beauty products, and more. We currently support products available in the US market.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq3" class="faq-toggle">
+                    <label for="faq3" class="faq-question">
+                        Do you sell my shopping data?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Never. Your privacy is our top priority. We do not sell, rent, or share your personal information or scanning history with third parties for marketing purposes. Your scans are yours alone. Read our full <a href="#privacy">Privacy Policy</a> for details.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq4" class="faq-toggle">
+                    <label for="faq4" class="faq-question">
+                        How accurate are the prices?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>We pull prices in real-time from retailer APIs and verified sources. Prices are typically updated multiple times per day. However, in-store prices may vary from online prices, and prices can change rapidly. We recommend using SavvyScan as a guide, and always verify the final price at checkout.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq5" class="faq-toggle">
+                    <label for="faq5" class="faq-question">
+                        Can I use this app in stores?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Absolutely! SavvyScan is designed for in-store use. Just open the app, point your camera at a barcode, and get instant information. Recent scans are cached so you can review them even if you lose signal in the store.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq6" class="faq-toggle">
+                    <label for="faq6" class="faq-question">
+                        How do I cancel my Premium subscription?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Premium subscriptions are managed entirely through your Apple ID and the App Store. To cancel: Open Settings > [Your Name] > Subscriptions > SavvyScan Premium > Cancel Subscription. You'll retain Premium access through the end of your billing period. You can resubscribe anytime.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq7" class="faq-toggle">
+                    <label for="faq7" class="faq-question">
+                        Which iPhones are supported?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>SavvyScan requires iOS 15.0 or later and works on iPhone 8 and newer models. The app uses your camera for barcode scanning, so a functioning camera is required.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq8" class="faq-toggle">
+                    <label for="faq8" class="faq-question">
+                        What if I have a problem or need help?
+                        <span class="faq-icon">▼</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>We're here to help! Visit our <a href="#support">Support page</a> to contact our support team via email or our contact form. Premium subscribers receive priority support with responses typically within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section" id="download">
+        <div class="container text-center">
+            <h2>Ready to Shop Smarter?</h2>
+            <p>Download SavvyScan free today and start making<br>better buying decisions in seconds.</p>
+            <a href="#" class="btn btn-primary btn-large">Download on the App Store</a>
+            <p class="cta-footer-note">No credit card required • Free forever • Cancel Premium anytime</p>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support">
+        <div class="container">
+            <h2 class="text-center">We're Here to Help</h2>
+            <p class="text-center" style="color: var(--text-light); max-width: 600px; margin: 0 auto 2rem;">Have a question or need assistance? Our support team is ready to help you get the most out of SavvyScan.</p>
+
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">✉️</div>
+                    <h3>Email Support</h3>
+                    <p><a href="mailto:support@savvyscan.app">support@savvyscan.app</a></p>
+                    <p style="font-size: 0.875rem; color: var(--text-light);">Response time: Within 48 hours<br>(Premium members: within 24 hours)</p>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">💡</div>
+                    <h3>FAQ</h3>
+                    <p>Most common questions answered</p>
+                    <a href="#faq" class="btn btn-secondary mt-2">View FAQ</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">💬</div>
+                    <h3>Feedback</h3>
+                    <p>Have an idea or suggestion?</p>
+                    <p><a href="mailto:feedback@savvyscan.app">feedback@savvyscan.app</a></p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3 class="text-center mb-3">Send Us a Message</h3>
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="premium">Are you a Premium subscriber?</label>
+                        <select id="premium" name="premium">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                            <option value="unsure">I'm not sure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a topic...</option>
+                            <option value="technical">Technical Issue / Bug Report</option>
+                            <option value="billing">Billing & Subscription Question</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="general">General Question</option>
+                            <option value="privacy">Privacy & Data Question</option>
+                            <option value="appstore">App Store / Download Issue</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <input type="checkbox" id="privacy-agree" name="privacy-agree" required>
+                        <label for="privacy-agree">I agree to the <a href="#privacy">Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+
+            <div class="text-center mt-4">
+                <p style="color: var(--text-light);">For business inquiries: <a href="mailto:business@savvyscan.app">business@savvyscan.app</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy -->
+    <section id="privacy" class="legal-page">
+        <div class="legal-content">
+            <h1>Privacy Policy</h1>
+            <p class="legal-date">Last Updated: November 7, 2025 | Effective Date: November 7, 2025</p>
+
+            <h2>Introduction</h2>
+            <p>SavvyScan ("we," "our," or "us") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our SavvyScan mobile application (the "App") on iOS devices.</p>
+            <p>Please read this Privacy Policy carefully. By downloading, installing, or using the App, you agree to the terms of this Privacy Policy. If you do not agree with our practices, please do not use the App.</p>
+            <p>We reserve the right to modify this Privacy Policy at any time. Changes will be effective when posted in the App and on our website. Your continued use after changes constitutes acceptance of the updated policy.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We collect information that you provide directly to us and information automatically collected when you use the App.</p>
+
+            <h3>1.1 Information You Provide to Us</h3>
+            <p><strong>Account Information:</strong> When you create an account with SavvyScan, we collect:</p>
+            <ul>
+                <li>Email address</li>
+                <li>Password (encrypted and securely stored)</li>
+                <li>Display name (optional)</li>
+            </ul>
+
+            <p><strong>User-Generated Content:</strong></p>
+            <ul>
+                <li>Products you scan (UPC codes)</li>
+                <li>Products you save to favorites or wishlists</li>
+                <li>Search queries</li>
+                <li>Feedback and support communications</li>
+            </ul>
+
+            <p><strong>Subscription Information:</strong></p>
+            <ul>
+                <li>Subscription status (Free or Premium)</li>
+                <li>Note: Payment information is processed entirely by Apple through the App Store. We do not collect or store your credit card information, billing address, or other payment details.</li>
+            </ul>
+
+            <h3>1.2 Information Automatically Collected</h3>
+            <p><strong>Usage Data:</strong> We collect analytics information about how you interact with the App, including features used, scan frequency, time spent in the App, navigation patterns, settings, device type, operating system version, app version, crash reports, error logs, and IP address.</p>
+
+            <p><strong>Device Information:</strong> Device model, iOS version, unique device identifiers (for analytics and crash reporting only), screen size and resolution (for UI optimization).</p>
+
+            <p><strong>Location Information:</strong> We do NOT collect precise GPS location. However, we may infer your general region (city or state level) from your IP address to provide relevant local retailer prices. This location information is not stored long-term.</p>
+
+            <h3>1.3 Information We Do Not Collect</h3>
+            <ul>
+                <li>We do not access your camera roll or photo library</li>
+                <li>We do not access your contacts</li>
+                <li>We do not collect biometric data</li>
+                <li>We do not track you across other apps or websites</li>
+                <li>We do not collect information about children (see Section 8)</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We use the information we collect to:</p>
+            <ul>
+                <li>Provide and improve the App</li>
+                <li>Enable barcode scanning and product recognition</li>
+                <li>Display product information, reviews, and prices</li>
+                <li>Maintain your scan history and saved products</li>
+                <li>Sync your data across devices (if logged in)</li>
+                <li>Provide customer support</li>
+                <li>Verify your Premium subscription status</li>
+                <li>Understand how users interact with the App</li>
+                <li>Identify and fix bugs and crashes</li>
+                <li>Comply with legal obligations</li>
+                <li>Enforce our Terms of Use</li>
+                <li>Protect against fraud, abuse, or illegal activity</li>
+            </ul>
+
+            <h2>3. How We Share Your Information</h2>
+            <p><strong>We do not sell, rent, or trade your personal information to third parties for marketing purposes.</strong></p>
+            <p>We may share your information only in the following limited circumstances:</p>
+
+            <p><strong>Service Providers:</strong> We work with trusted third-party companies to help operate the App, including cloud hosting providers, analytics services, and product data providers. These service providers have access only to the information necessary to perform their functions and are contractually obligated to protect your data.</p>
+
+            <p><strong>Legal Requirements:</strong> We may disclose your information if required by law, such as in response to a court order, subpoena, or legal process, to comply with government requests, to enforce our Terms of Use, or to protect rights, property, or safety.</p>
+
+            <p><strong>Business Transfers:</strong> If SavvyScan is acquired by or merged with another company, your information may be transferred as part of that transaction. We will notify you of any change in ownership.</p>
+
+            <h2>4. Data Retention</h2>
+            <p>We retain your information for as long as your account is active or as needed to provide you services. Account data is retained until you delete your account. Free users' scan history includes the 10 most recent scans; Premium users have unlimited scan history retained until account deletion.</p>
+            <p>You can delete your account and all associated data at any time through the App (Settings > Account > Delete Account) or by contacting us at support@savvyscan.app.</p>
+
+            <h2>5. Data Security</h2>
+            <p>We implement reasonable administrative, technical, and physical security measures to protect your information against unauthorized access, alteration, disclosure, or destruction, including encryption of data in transit (TLS/SSL), encryption of sensitive data at rest, secure authentication mechanisms, regular security assessments, and limited employee access to personal data.</p>
+            <p>However, no method of electronic storage or internet transmission is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+
+            <h2>6. Your Privacy Rights</h2>
+            <p>Depending on your location, you may have certain rights regarding your personal information:</p>
+            <ul>
+                <li><strong>Access:</strong> Request a copy of the personal information we hold about you</li>
+                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
+                <li><strong>Deletion:</strong> Request deletion of your account and personal data</li>
+                <li><strong>Portability:</strong> Request a copy of your data in a machine-readable format</li>
+                <li><strong>Opt-Out:</strong> Opt out of marketing communications</li>
+            </ul>
+            <p>To exercise these rights, contact us at support@savvyscan.app or use the in-app account settings.</p>
+
+            <h2>7. Third-Party Services</h2>
+            <p>The App integrates with third-party services for certain functionality, including Apple App Store for subscription processing and payment (governed by Apple's Privacy Policy) and product data providers for product information, pricing, and reviews.</p>
+            <p>The App may contain links to third-party websites or retailers. We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies.</p>
+
+            <h2>8. Children's Privacy</h2>
+            <p>SavvyScan is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13 without parental consent, we will take steps to delete that information as quickly as possible.</p>
+            <p>If you believe we have collected information from a child under 13, please contact us immediately at support@savvyscan.app.</p>
+
+            <h2>9. California Privacy Rights (CCPA)</h2>
+            <p>If you are a California resident, you have specific rights under the California Consumer Privacy Act (CCPA):</p>
+            <ul>
+                <li><strong>Right to Know:</strong> Request information about the categories and specific pieces of personal information we've collected</li>
+                <li><strong>Right to Delete:</strong> Request deletion of your personal information, subject to certain exceptions</li>
+                <li><strong>Right to Opt-Out of Sale:</strong> We do not sell your personal information</li>
+                <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights</li>
+            </ul>
+            <p>To exercise these rights, email support@savvyscan.app with "CCPA Request" in the subject line.</p>
+
+            <h2>10. International Data Transfers</h2>
+            <p>SavvyScan is based in the United States. If you access the App from outside the United States, your information may be transferred to, stored, and processed in the United States or other countries where our service providers operate. By using the App, you consent to the transfer of your information to countries outside your country of residence, which may have different data protection laws.</p>
+
+            <h2>11. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. We will notify you of material changes by posting the updated policy in the App and on our website, updating the "Last Updated" date, and sending an email notification (if you have an account).</p>
+            <p>Your continued use of the App after changes become effective constitutes acceptance of the revised policy.</p>
+
+            <h2>12. Contact Us</h2>
+            <p>If you have questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us:</p>
+            <p>
+                <strong>Email:</strong> support@savvyscan.app<br>
+                <strong>Website:</strong> <a href="#support">savvyscan.app/support</a><br>
+                <strong>Mailing Address:</strong> [INSERT YOUR BUSINESS MAILING ADDRESS HERE]
+            </p>
+            <p>We will respond to your inquiry within 30 days.</p>
+
+            <h2>Acknowledgment</h2>
+            <p>By using SavvyScan, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.</p>
+
+            <p style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-light); border-left: 4px solid var(--primary-color); font-size: 0.875rem;">
+                <strong>Legal Disclaimer:</strong> This Privacy Policy template is provided for informational purposes only and does not constitute legal advice. Before publishing, this document must be reviewed, customized, and approved by a qualified attorney familiar with iOS App Store requirements, state privacy laws (including CCPA, Virginia CDPA, etc.), federal laws (including COPPA, CAN-SPAM, etc.), and international laws if applicable (GDPR, PIPEDA, etc.). Ensure all statements accurately reflect your actual practices and add your business mailing address before publishing.
+            </p>
+        </div>
+    </section>
+
+    <!-- Terms of Use -->
+    <section id="terms" class="legal-page">
+        <div class="legal-content">
+            <h1>Terms of Use</h1>
+            <p class="legal-date">Last Updated: November 7, 2025 | Effective Date: November 7, 2025</p>
+
+            <h2>Agreement to Terms</h2>
+            <p>These Terms of Use ("Terms") constitute a legally binding agreement between you and SavvyScan ("Company," "we," "our," or "us") regarding your use of the SavvyScan mobile application (the "App") on iOS devices.</p>
+            <p><strong>BY DOWNLOADING, INSTALLING, OR USING THE APP, YOU AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE APP.</strong></p>
+            <p>We reserve the right to modify these Terms at any time. We will notify you of material changes via the App or email. Your continued use after changes become effective constitutes acceptance of the revised Terms.</p>
+
+            <h2>1. License to Use the App</h2>
+            <h3>1.1 Grant of License</h3>
+            <p>Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to download, install, and use the App on iOS devices that you own or control, solely for your personal, non-commercial use.</p>
+
+            <h3>1.2 License Restrictions</h3>
+            <p>You agree NOT to:</p>
+            <ul>
+                <li>Modify, adapt, translate, or create derivative works of the App</li>
+                <li>Reverse engineer, decompile, disassemble, or attempt to derive source code from the App</li>
+                <li>Remove, alter, or obscure any copyright, trademark, or other proprietary notices</li>
+                <li>Use the App for any illegal or unauthorized purpose</li>
+                <li>Use the App in violation of any applicable laws or regulations</li>
+                <li>Rent, lease, lend, sell, redistribute, or sublicense the App</li>
+                <li>Use the App to compete with or build a competitive product or service</li>
+                <li>Use automated systems (bots, scrapers) to access the App</li>
+                <li>Interfere with or disrupt the App's functionality or servers</li>
+                <li>Transmit viruses, malware, or other harmful code</li>
+                <li>Attempt to gain unauthorized access to any part of the App or related systems</li>
+            </ul>
+
+            <h3>1.3 Apple App Store Terms</h3>
+            <p>Your use of the App is also subject to the Apple Media Services Terms and Conditions and Apple's Usage Rules. If these Terms conflict with Apple's terms, Apple's terms control with respect to your use of the App.</p>
+
+            <h2>2. Accounts and Registration</h2>
+            <h3>2.1 Account Creation</h3>
+            <p>To access certain features, you must create an account. You agree to provide accurate, current, and complete information; maintain and update your information to keep it accurate; maintain the security and confidentiality of your password; notify us immediately of any unauthorized use of your account; and be responsible for all activities under your account.</p>
+
+            <h3>2.2 Account Termination</h3>
+            <p>We reserve the right to suspend or terminate your account at any time if you violate these Terms, engage in fraudulent, abusive, or illegal activity, we are required to do so by law, or we discontinue the App or service. You may delete your account at any time through the App settings.</p>
+
+            <h2>3. Subscriptions and Payments</h2>
+            <h3>3.1 Subscription Plans</h3>
+            <p>SavvyScan offers both a free version and a Premium subscription with enhanced features. Subscription details and pricing are described in the App and on our website.</p>
+
+            <h3>3.2 Payment Processing</h3>
+            <p>All subscription purchases are processed through the Apple App Store and are subject to Apple's payment terms. We do not directly process payments or store your payment information.</p>
+
+            <h3>3.3 Subscription Terms</h3>
+            <ul>
+                <li>Subscriptions automatically renew unless canceled at least 24 hours before the end of the current period</li>
+                <li>Your Apple ID account will be charged for renewal within 24 hours prior to the end of the current period</li>
+                <li>You can manage or cancel your subscription through your Apple ID account settings</li>
+                <li>Cancellations take effect at the end of the current billing period</li>
+                <li>No refunds for partial periods if you cancel mid-cycle</li>
+            </ul>
+
+            <h3>3.4 Free Trial</h3>
+            <p>Premium subscriptions may include a free trial period. You will be charged the subscription fee when the trial ends unless you cancel before the trial period expires. We reserve the right to limit free trial eligibility.</p>
+
+            <h3>3.5 Refunds</h3>
+            <p>All purchases are final and non-refundable except as required by law. For refund requests, contact Apple Support, as all payments are processed through the App Store. We do not control Apple's refund policies.</p>
+
+            <h2>4. Product Information and Pricing</h2>
+            <h3>4.1 Information Accuracy</h3>
+            <p>The App provides product information, pricing, reviews, and other data obtained from third-party sources. While we strive for accuracy, we do not guarantee that all information is accurate, complete, current, or error-free.</p>
+            <p><strong>PRODUCT PRICES, AVAILABILITY, AND DESCRIPTIONS ARE PROVIDED FOR INFORMATIONAL PURPOSES ONLY. ALWAYS VERIFY PRODUCT DETAILS AND FINAL PRICES WITH THE RETAILER BEFORE MAKING A PURCHASE.</strong></p>
+
+            <h3>4.2 No Purchase Guarantee</h3>
+            <p>The App is an informational tool. We do not sell products, fulfill orders, or guarantee product availability. We are not responsible for any purchases you make based on information from the App.</p>
+
+            <h3>4.3 Third-Party Retailers</h3>
+            <p>The App may provide links to third-party retailer websites and stores. We are not responsible for the content, policies, or practices of third parties. Transactions with third parties are solely between you and that third party.</p>
+
+            <h2>5. Intellectual Property Rights</h2>
+            <p>The App and all content, features, and functionality are owned by SavvyScan or our licensors and are protected by copyright, trademark, patent, and other intellectual property laws. SavvyScan, the SavvyScan logo, and other marks are trademarks of SavvyScan. You may not use these marks without our prior written permission. Apple, iPhone, App Store, and related marks are trademarks of Apple Inc.</p>
+
+            <h2>6. Disclaimers and Limitations of Liability</h2>
+            <h3>6.1 "AS IS" and "AS AVAILABLE"</h3>
+            <p>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR THAT THE APP WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE.</p>
+
+            <h3>6.2 Limitation of Liability</h3>
+            <p>TO THE FULLEST EXTENT PERMITTED BY LAW, SAVVYSCAN AND ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AND LICENSORS WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR USE, ARISING OUT OF OR RELATED TO YOUR USE OF THE APP.</p>
+            <p>TO THE EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATED TO THE APP WILL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR $100, WHICHEVER IS GREATER.</p>
+
+            <h2>7. Termination</h2>
+            <p>You may stop using the App and delete your account at any time through the App settings. We may suspend or terminate your access to the App at any time, with or without notice, for any reason. Upon termination, your right to use the App immediately ceases, and we may delete your account and User Data (subject to data retention obligations).</p>
+
+            <h2>8. Dispute Resolution</h2>
+            <h3>8.1 Informal Resolution</h3>
+            <p>Before filing a formal claim, you agree to contact us at support@savvyscan.app to attempt to resolve any dispute informally.</p>
+
+            <h3>8.2 Governing Law</h3>
+            <p>These Terms are governed by and construed in accordance with the laws of [INSERT YOUR STATE/JURISDICTION], without regard to conflict of law principles.</p>
+
+            <h2>9. Apple-Specific Terms</h2>
+            <p>You acknowledge that:</p>
+            <ul>
+                <li>These Terms are between you and SavvyScan only, not Apple</li>
+                <li>Apple has no obligation to provide maintenance or support for the App</li>
+                <li>Apple is not responsible for any product warranty claims</li>
+                <li>Apple is not responsible for addressing any claims by you or third parties related to the App</li>
+                <li>Apple is a third-party beneficiary of these Terms and may enforce them against you</li>
+            </ul>
+
+            <h2>10. Contact Information</h2>
+            <p>If you have questions about these Terms, please contact us:</p>
+            <p>
+                <strong>Email:</strong> support@savvyscan.app<br>
+                <strong>Website:</strong> <a href="#support">savvyscan.app/support</a><br>
+                <strong>Mailing Address:</strong> [INSERT YOUR BUSINESS MAILING ADDRESS HERE]
+            </p>
+
+            <h2>Acknowledgment</h2>
+            <p>By using SavvyScan, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use.</p>
+
+            <p style="margin-top: 3rem; padding: 1.5rem; background: var(--bg-light); border-left: 4px solid var(--primary-color); font-size: 0.875rem;">
+                <strong>Legal Disclaimer:</strong> This Terms of Use template is provided for informational purposes only and does not constitute legal advice. Before publishing, have these terms reviewed and customized by a licensed attorney. Ensure arbitration provisions comply with state law, add your business mailing address, verify governing law and venue match your business location, confirm accuracy regarding subscription terms and Apple's requirements, and update regularly as your app features or business practices change. DO NOT publish this template without legal review.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#support">Help Center</a></li>
+                        <li><a href="#support">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:support@savvyscan.app">support@savvyscan.app</a></li>
+                        <li><a href="mailto:feedback@savvyscan.app">feedback@savvyscan.app</a></li>
+                        <li><a href="mailto:business@savvyscan.app">business@savvyscan.app</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SavvyScan. All rights reserved.<br>
+                iPhone and App Store are trademarks of Apple Inc.</p>
+                <p style="margin-top: 1rem; opacity: 0.8;">Made with care for smart shoppers everywhere.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
