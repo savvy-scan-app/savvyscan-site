@@ -10,194 +10,520 @@
     <!-- <meta http-equiv="refresh" content="0;url=https://savvyscan.app/contact.html"> -->
 
     <style>
+        /* CSS Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding: 20px;
+        :root {
+            --primary-color: #01744b;
+            --primary-dark: #00592f;
+            --primary-light: #85e7ad;
+            --accent-color: #ff861a;
+            --accent-secondary: #f0660a;
+            --text-dark: #322112;
+            --text-body: #333;
+            --text-light: #556d4c;
+            --bg-light: #fef2d7;
+            --bg-gray: #f5f5f7;
+            --bg-cream: #fef2d7;
+            --green-muted: #79ab8b;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --radius-lg: 12px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 30px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-body);
+            background: var(--bg-cream);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-dark);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 10px;
+            font-size: clamp(2rem, 5vw, 3rem);
         }
 
         h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e9ecef;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
         }
 
         h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #34495e;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
         }
 
         p {
-            margin-bottom: 15px;
-            font-size: 16px;
+            margin-bottom: 1rem;
         }
 
         a {
-            color: #007bff;
+            color: var(--accent-color);
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         a:hover {
-            text-decoration: underline;
+            color: var(--primary-dark);
         }
 
-        .contact-box {
-            background-color: #f1f3f5;
-            padding: 20px;
-            border-radius: 6px;
-            margin: 20px 0;
-            border-left: 4px solid #007bff;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .contact-box p {
-            margin-bottom: 10px;
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            padding: 1rem 0;
         }
 
-        .contact-box p:last-child {
-            margin-bottom: 0;
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .instruction-box {
-            background-color: #e7f5ff;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border-left: 4px solid #339af0;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .instruction-box p {
-            margin-bottom: 0;
-            font-size: 16px;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
         }
 
-        .faq-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-        }
-
-        .faq-item h3 {
-            margin-top: 0;
-            color: #495057;
-        }
-
-        .faq-item p {
-            margin-bottom: 0;
-            color: #6c757d;
-        }
-
-        .footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
             text-align: center;
-            color: #6c757d;
-            font-size: 14px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            min-height: 48px;
+            line-height: 1.2;
+            text-decoration: none;
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(240, 102, 10, 0.35);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff9933 0%, #ff6600 100%);
+            color: white;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(240, 102, 10, 0.5);
+        }
+
+        /* Page Content */
+        .support-page {
+            min-height: calc(100vh - 300px);
+            padding: 4rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .contact-section h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .contact-item strong {
+            min-width: 140px;
+            color: var(--text-dark);
+        }
+
+        .contact-item a {
+            font-weight: 600;
+        }
+
+        /* Instructions Section */
+        .instructions-section {
+            margin-bottom: 3rem;
+        }
+
+        .instructions-section h2 {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .instruction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .instruction-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .instruction-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+
+        .instruction-card p {
+            color: var(--text-body);
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-section h2 {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .faq-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-card h3 {
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+        }
+
+        .faq-card p {
+            color: var(--text-light);
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+
+        /* Footer Note */
+        .footer-note {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-top: 3rem;
+        }
+
+        .footer-note p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .support-page {
+                padding: 2rem 0;
             }
 
-            .container {
-                padding: 20px 15px;
+            .contact-section,
+            .instruction-card,
+            .faq-card {
+                padding: 1.5rem;
             }
 
-            h1 {
-                font-size: 28px;
+            .instruction-grid {
+                grid-template-columns: 1fr;
             }
 
-            h2 {
-                font-size: 22px;
-                margin-top: 30px;
+            .contact-item {
+                flex-direction: column;
+                gap: 0.25rem;
             }
 
-            h3 {
-                font-size: 17px;
-            }
-
-            p, .instruction-box p {
-                font-size: 15px;
+            .contact-item strong {
+                min-width: auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SavvyScan Support</h1>
-        <p>Welcome to SavvyScan support. We're here to help you get the most out of your barcode scanning and Amazon price checking experience.</p>
-
-        <h2>Contact Us</h2>
-        <div class="contact-box">
-            <p><strong>Email:</strong> <a href="mailto:support@savvyscan.app">support@savvyscan.app</a></p>
-            <p><strong>Contact Form:</strong> <a href="https://savvyscan.app/contact.html">Submit a support request</a></p>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="ICONS/04-SavvyScan-Preview-1024-NoBorder_Tight.png" alt="SavvyScan" class="logo-icon">
+                SavvyScan
+            </a>
+            <a href="index.html" class="btn btn-primary">← Back to Home</a>
         </div>
+    </nav>
 
-        <h2>Common Issues</h2>
+    <!-- Support Page Content -->
+    <div class="support-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>SavvyScan Support</h1>
+                <p>We're here to help you get the most out of your barcode scanning and Amazon price comparison experience.</p>
+            </div>
 
-        <h3>How to Restore Purchases</h3>
-        <div class="instruction-box">
-            <p>Open SavvyScan → Account → Restore Purchases. Use the same Apple ID you bought Premium with.</p>
-        </div>
+            <div class="content-wrapper">
+                <!-- Contact Section -->
+                <div class="contact-section">
+                    <h2>Contact Us</h2>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <strong>Email:</strong>
+                            <a href="mailto:support@savvyscan.app">support@savvyscan.app</a>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Contact Form:</strong>
+                            <a href="https://savvyscan.app/contact.html">Submit a support request</a>
+                        </div>
+                    </div>
+                </div>
 
-        <h3>How to Cancel Your Subscription</h3>
-        <div class="instruction-box">
-            <p>Settings → Apple ID → Subscriptions → SavvyScan → Cancel. Apple manages billing/refunds.</p>
-        </div>
+                <!-- Instructions Section -->
+                <div class="instructions-section">
+                    <h2>Common Solutions</h2>
+                    <div class="instruction-grid">
+                        <div class="instruction-card">
+                            <h3>Restore Purchases</h3>
+                            <p>Open SavvyScan → Account → Restore Purchases. Use the same Apple ID you bought Premium with.</p>
+                        </div>
+                        <div class="instruction-card">
+                            <h3>Cancel Subscription</h3>
+                            <p>Settings → Apple ID → Subscriptions → SavvyScan → Cancel. Apple manages billing/refunds.</p>
+                        </div>
+                    </div>
+                </div>
 
-        <h2>Frequently Asked Questions</h2>
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-card">
+                            <h3>Scans not unlocking</h3>
+                            <p>Try Restore Purchases and restart the app. Make sure you're signed in with the same Apple ID you used to purchase Premium.</p>
+                        </div>
+                        <div class="faq-card">
+                            <h3>Scan limit reached</h3>
+                            <p>Wait for daily reset or watch a rewarded ad if available. Premium subscribers get unlimited scans.</p>
+                        </div>
+                        <div class="faq-card">
+                            <h3>Price mismatch</h3>
+                            <p>Amazon prices change frequently; refresh to get the latest. Prices are pulled in real-time from Amazon's API.</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="faq-item">
-            <h3>Scans not unlocking</h3>
-            <p>Try using the Restore Purchases feature (Account → Restore Purchases) and restart the app. Make sure you're signed in with the same Apple ID you used to purchase Premium.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>Scan limit reached</h3>
-            <p>Wait for the daily reset (usually at midnight) or watch a rewarded ad if available in your region. Premium subscribers get unlimited scans.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3>Price mismatch</h3>
-            <p>Amazon prices change frequently throughout the day. Pull down to refresh and get the latest pricing information. Prices shown are from Amazon's live API.</p>
-        </div>
-
-        <div class="footer">
-            <p>Last updated: Nov 2025</p>
+                <!-- Footer Note -->
+                <div class="footer-note">
+                    <p>Last updated: Nov 2025</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="index.html#support">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:support@savvyscan.app">General Inquiries</a></li>
+                        <li><a href="mailto:support@savvyscan.app">Feedback & Support</a></li>
+                        <li><a href="mailto:support@savvyscan.app">Business Inquiries</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.875rem; margin-bottom: 1rem; font-weight: 600;">
+                    As an Amazon Associate I earn from qualifying purchases.
+                </p>
+                <p>&copy; 2025 SavvyScan. All rights reserved.<br>
+                iPhone and App Store are trademarks of Apple Inc. Amazon is a trademark of Amazon.com, Inc.</p>
+                <p style="margin-top: 1rem; opacity: 0.8;">Made for smart shoppers.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
