@@ -294,11 +294,17 @@
                         <path d="M22 33.5L28.5 40L42.5 24" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h1>You’re all set!</h1>
-                <p>Your SavvyScan account has been confirmed. Jump back into the app to start scanning barcodes, tracking prices, and finding Amazon savings in seconds.</p>
+                <h1>You're all set!</h1>
+                <p>Your SavvyScan account has been confirmed. Jump back into the app to start scanning barcodes, tracking prices, and finding online deals in seconds.</p>
 
                 <div class="cta-group">
-                    <a href="index.html#download" class="btn btn-primary">Open SavvyScan</a>
+                    <a href="savvyscan://email-verified" class="btn btn-primary">Open SavvyScan App</a>
+                </div>
+
+                <!-- Fallback message if app doesn't open -->
+                <div id="fallback-message" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 134, 26, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--text-body);">
+                    <strong>Don't have the app yet?</strong><br>
+                    <a href="index.html#download" style="color: var(--accent-color); text-decoration: underline;">Download SavvyScan</a> to get started.
                 </div>
 
                 <div class="next-steps">
@@ -316,5 +322,30 @@
             </div>
         </div>
     </main>
+
+    <script>
+        // Attempt to deep link into the app automatically
+        function tryOpenApp() {
+            console.log('Attempting to open SavvyScan app...');
+
+            // Try to open the app via custom URL scheme
+            window.location.href = 'savvyscan://email-verified';
+
+            // If user is still on page after 2.5 seconds, they likely don't have app installed
+            setTimeout(function() {
+                var fallbackMsg = document.getElementById('fallback-message');
+                if (fallbackMsg) {
+                    fallbackMsg.style.display = 'block';
+                    console.log('App did not open - showing fallback message');
+                }
+            }, 2500);
+        }
+
+        // Try opening app when page loads
+        window.addEventListener('load', function() {
+            // Small delay to ensure page is fully rendered
+            setTimeout(tryOpenApp, 500);
+        });
+    </script>
 </body>
 </html>
