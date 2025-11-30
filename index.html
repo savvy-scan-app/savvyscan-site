@@ -1043,5 +1043,17 @@
             </div>
         </div>
     </footer>
+    <script>
+        // If Supabase magic links land on the root with recovery tokens in the hash,
+        // forward them to the password reset handler page so the app deep link works.
+        (function () {
+            var hash = window.location.hash || "";
+            var hasRecoveryTokens = hash.indexOf("type=recovery") !== -1 && hash.indexOf("access_token=") !== -1;
+            var alreadyOnResetPage = window.location.pathname.indexOf("password-reset-success.html") !== -1;
+            if (hasRecoveryTokens && !alreadyOnResetPage) {
+                window.location.replace("password-reset-success.html" + hash);
+            }
+        })();
+    </script>
 </body>
 </html>
