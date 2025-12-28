@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <!-- Google Analytics - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SavvyScan - Scan supermarket products and compare prices with Amazon to find real savings on your everyday shopping.">
     <meta name="keywords" content="barcode scanner, price comparison, Amazon comparison, smart shopping, supermarket savings, iOS app">
@@ -11,6 +21,13 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://savvyscan.app">
     <meta property="og:image" content="https://savvyscan.app/ICONS/android-chrome-512x512.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SavvyScan - Compare Supermarket Prices with Amazon">
+    <meta name="twitter:description" content="Scan products at your local supermarket and instantly see if Amazon has a better price.">
+    <meta name="twitter:image" content="https://savvyscan.app/ICONS/android-chrome-512x512.png">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://savvyscan.app">
     <title>SavvyScan - Compare Supermarket Prices with Amazon</title>
     <link rel="icon" type="image/png" sizes="32x32" href="ICONS/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ICONS/favicon-16x16.png">
@@ -849,18 +866,54 @@
         .mt-3 { margin-top: 1.5rem; }
         .mt-4 { margin-top: 2rem; }
     </style>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SavvyScan",
+      "operatingSystem": "iOS",
+      "applicationCategory": "ShoppingApplication",
+      "description": "Scan supermarket products and compare prices with Amazon to find real savings on your everyday shopping.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "SavvyScan",
+        "url": "https://savvyscan.app"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SavvyScan",
+      "url": "https://savvyscan.app",
+      "logo": "https://savvyscan.app/ICONS/android-chrome-512x512.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@savvyscan.app",
+        "contactType": "customer support"
+      }
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav role="navigation" aria-label="Main navigation">
         <div class="container">
-            <a href="#home" class="logo">
-                <img src="ICONS/app-icon-1024.png" alt="SavvyScan" class="logo-icon">
+            <a href="#home" class="logo" aria-label="SavvyScan - Home">
+                <img src="ICONS/app-icon-1024.png" alt="SavvyScan Logo" class="logo-icon">
                 SavvyScan
             </a>
-            <label for="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle menu">☰</label>
-            <input type="checkbox" id="mobile-menu-toggle">
-            <ul class="nav-links">
+            <label for="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">☰</label>
+            <input type="checkbox" id="mobile-menu-toggle" aria-hidden="true">
+            <ul class="nav-links" role="menubar">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
@@ -871,7 +924,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" role="banner" aria-label="Hero section">
         <div class="container text-center">
             <h1>Compare Supermarket Prices<br>with Amazon. Instantly.</h1>
             <p>Scan products at your local store and discover if Amazon has a better price.<br>Turn your everyday shopping into a savings hunt.</p>
@@ -933,7 +986,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3>Dashboard Tracking</h3>
-                    <p>Add scanned items to your dashboard to track prices over time. Free plan: 1 tracked item. Premium plan: 30 tracked items.</p>
+                    <p>Add scanned items to your dashboard to track prices over time. Free plan: 1 tracked item. Premium plan: 20 tracked items.</p>
                 </div>
             </div>
         </div>
@@ -949,7 +1002,7 @@
                     <p class="pricing-subtitle">Perfect for occasional shoppers</p>
                     <div class="price">$0<span class="price-period">/forever</span></div>
                     <ul class="pricing-features">
-                        <li>10 free scans daily</li>
+                        <li>Up to 15 scans daily</li>
                         <li>1 tracked item on dashboard</li>
                         <li>Amazon price comparison</li>
                         <li>Basic product information</li>
@@ -964,7 +1017,7 @@
                     <p style="color: var(--text-light); font-size: 0.875rem; margin-bottom: 1rem;">or $39.99/year (Save 33%)</p>
                     <ul class="pricing-features">
                         <li>Unlimited scans</li>
-                        <li>30 tracked items on dashboard</li>
+                        <li>20 tracked items on dashboard</li>
                         <li>Amazon price comparison</li>
                         <li>Ad-free experience</li>
                         <li>Priority support</li>
@@ -972,6 +1025,46 @@
                     <a href="#download" class="btn btn-primary">Start Free Trial</a>
                     <p class="mt-3" style="font-size: 0.875rem; color: var(--text-light);">Cancel anytime through the App Store.</p>
                 </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div style="max-width: 700px; margin: 3rem auto 0; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+                    <thead>
+                        <tr style="background: var(--primary-color); color: white;">
+                            <th style="padding: 1rem; text-align: left; font-weight: 600;">Feature</th>
+                            <th style="padding: 1rem; text-align: center; font-weight: 600;">Free</th>
+                            <th style="padding: 1rem; text-align: center; font-weight: 600; background: var(--accent-color);">Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem;">Daily Scans</td>
+                            <td style="padding: 1rem; text-align: center;">Up to 15</td>
+                            <td style="padding: 1rem; text-align: center; font-weight: 600; color: var(--primary-color);">Unlimited</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-light);">
+                            <td style="padding: 1rem;">Tracked Items</td>
+                            <td style="padding: 1rem; text-align: center;">1</td>
+                            <td style="padding: 1rem; text-align: center; font-weight: 600; color: var(--primary-color);">20</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem;">Amazon Price Comparison</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-light);">
+                            <td style="padding: 1rem;">Ad-Free Experience</td>
+                            <td style="padding: 1rem; text-align: center; color: #dc2626;">&#10007;</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem;">Priority Support</td>
+                            <td style="padding: 1rem; text-align: center; color: #dc2626;">&#10007;</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -981,6 +1074,142 @@
         <div class="container">
             <h2 class="text-center">Join Early Adopters Discovering Smarter Shopping</h2>
             <p class="text-center" style="color: var(--text-light); max-width: 600px; margin: 2rem auto;">SavvyScan is designed for savvy shoppers who want to make every dollar count. Start comparing prices today and discover where your supermarket really stacks up against Amazon.</p>
+        </div>
+    </section>
+
+    <!-- Real Savings Examples -->
+    <section id="savings-examples">
+        <div class="container">
+            <h2 class="text-center">Real Savings Found by Our Users</h2>
+            <p class="text-center" style="color: var(--text-light); max-width: 650px; margin: 0 auto 2.5rem;">
+                These are actual price comparisons from everyday products. See how much you could save by comparing before you buy.
+            </p>
+
+            <div class="features-grid" style="max-width: 1000px; margin: 0 auto;">
+                <!-- Product 1: Dove Deodorant -->
+                <div class="feature-card" style="text-align: center; padding: 2rem 1.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧴</div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Dove Deodorant</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Powder Scent</p>
+                    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem;">
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">Supermarket</p>
+                            <p style="font-size: 1.25rem; font-weight: 700; color: #dc2626; margin: 0; text-decoration: line-through;">$4.50<span style="font-size: 0.7rem; font-weight: 400;">/ea</span></p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">Amazon 6-Pack</p>
+                            <p style="font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin: 0;">$3.87<span style="font-size: 0.7rem; font-weight: 400;">/ea</span></p>
+                        </div>
+                    </div>
+                    <p style="background: var(--primary-light); color: var(--primary-dark); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;">Save ~14% per unit</p>
+                    <br>
+                    <a href="https://www.amazon.com/dp/B001ET78K6?tag=northwindtech-20" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">View on Amazon</a>
+                </div>
+
+                <!-- Product 2: Huggies Diapers (BEST DEAL - Center) -->
+                <div class="feature-card" style="text-align: center; padding: 2rem 1.5rem; border: 2px solid var(--accent-color);">
+                    <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-bottom: 0.5rem;">BEST DEAL</div>
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">👶</div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Huggies Diapers</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Little Movers Size 3 (25 ct)</p>
+                    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem;">
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">Supermarket</p>
+                            <p style="font-size: 1.25rem; font-weight: 700; color: #dc2626; margin: 0; text-decoration: line-through;">$24.39</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">Amazon</p>
+                            <p style="font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin: 0;">$9.94</p>
+                        </div>
+                    </div>
+                    <p style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;">Save 59%</p>
+                    <br>
+                    <a href="https://www.amazon.com/dp/B0DKYP6V7Y?tag=northwindtech-20" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">View on Amazon</a>
+                </div>
+
+                <!-- Product 3: Sensodyne Toothpaste -->
+                <div class="feature-card" style="text-align: center; padding: 2rem 1.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🦷</div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Sensodyne Pronamel</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Whitening Toothpaste</p>
+                    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem;">
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">Supermarket</p>
+                            <p style="font-size: 1.25rem; font-weight: 700; color: #dc2626; margin: 0; text-decoration: line-through;">$11.29<span style="font-size: 0.7rem; font-weight: 400;">/ea</span></p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">Amazon 3-Pack</p>
+                            <p style="font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin: 0;">$5.66<span style="font-size: 0.7rem; font-weight: 400;">/ea</span></p>
+                        </div>
+                    </div>
+                    <p style="background: var(--primary-light); color: var(--primary-dark); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;">Save 50% per unit</p>
+                    <br>
+                    <a href="https://www.amazon.com/dp/B0BM4LTVLX?tag=northwindtech-20" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">View on Amazon</a>
+                </div>
+            </div>
+
+            <p class="text-center" style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-light);">
+                Prices may vary. As an Amazon Associate, SavvyScan earns from qualifying purchases.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="text-center">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <input type="checkbox" id="faq1" class="faq-toggle">
+                    <label for="faq1" class="faq-question">
+                        Is SavvyScan really free?
+                        <span class="faq-icon">&#9660;</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Yes! SavvyScan is free to download and use. The free plan includes up to 15 scans per day and 1 tracked item. Premium is optional for users who want unlimited scans and more features.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq2" class="faq-toggle">
+                    <label for="faq2" class="faq-question">
+                        How does price comparison work?
+                        <span class="faq-icon">&#9660;</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Scan any product barcode, enter the price you see on the shelf, and SavvyScan instantly shows you the current Amazon price. You'll see the difference at a glance.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq3" class="faq-toggle">
+                    <label for="faq3" class="faq-question">
+                        Will I always save money?
+                        <span class="faq-icon">&#9660;</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Not always - sometimes your local store has the better price! That's the whole point of comparison. SavvyScan helps you discover savings opportunities when they exist.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq4" class="faq-toggle">
+                    <label for="faq4" class="faq-question">
+                        How do I cancel my Premium subscription?
+                        <span class="faq-icon">&#9660;</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>Premium subscriptions are managed through Apple. Go to Settings > [Your Name] > Subscriptions > SavvyScan > Cancel. You'll keep access until the end of your billing period.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq5" class="faq-toggle">
+                    <label for="faq5" class="faq-question">
+                        Which iPhones are supported?
+                        <span class="faq-icon">&#9660;</span>
+                    </label>
+                    <div class="faq-answer">
+                        <p>SavvyScan requires iOS 15.0 or later and works on iPhone 8 and newer models. A functioning camera is required for barcode scanning.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -994,7 +1223,7 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo" aria-label="Site footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
@@ -1044,6 +1273,19 @@
         </div>
     </footer>
     <script>
+        // Close mobile menu when a link is clicked
+        (function () {
+            var navLinks = document.querySelectorAll('.nav-links a');
+            var menuToggle = document.getElementById('mobile-menu-toggle');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (menuToggle) {
+                        menuToggle.checked = false;
+                    }
+                });
+            });
+        })();
+
         // If Supabase magic links land on the root with recovery tokens in the hash,
         // forward them to the password reset handler page so the app deep link works.
         (function () {

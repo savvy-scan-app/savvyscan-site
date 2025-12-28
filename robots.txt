@@ -1,0 +1,11 @@
+# robots.txt for savvyscan.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://savvyscan.app/sitemap.xml
+
+# Disallow technical pages
+Disallow: /verification-success.html
+Disallow: /password-reset-success.html
