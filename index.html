@@ -1026,43 +1026,43 @@
             </div>
 
             <!-- Comparison Table -->
-            <div style="max-width: 700px; margin: 3rem auto 0; overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
-                    <thead>
-                        <tr style="background: var(--primary-color); color: white;">
-                            <th style="padding: 1rem; text-align: left; font-weight: 600;">Feature</th>
-                            <th style="padding: 1rem; text-align: center; font-weight: 600;">Free</th>
-                            <th style="padding: 1rem; text-align: center; font-weight: 600; background: var(--accent-color);">Premium</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem;">Daily Scans</td>
-                            <td style="padding: 1rem; text-align: center;">Up to 15</td>
-                            <td style="padding: 1rem; text-align: center; font-weight: 600; color: var(--primary-color);">Unlimited</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-light);">
-                            <td style="padding: 1rem;">Tracked Items</td>
-                            <td style="padding: 1rem; text-align: center;">1</td>
-                            <td style="padding: 1rem; text-align: center; font-weight: 600; color: var(--primary-color);">20</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem;">Amazon Price Comparison</td>
-                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
-                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color); background: var(--bg-light);">
-                            <td style="padding: 1rem;">Ad-Free Experience</td>
-                            <td style="padding: 1rem; text-align: center; color: #dc2626;">&#10007;</td>
-                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem;">Priority Support</td>
-                            <td style="padding: 1rem; text-align: center; color: #dc2626;">&#10007;</td>
-                            <td style="padding: 1rem; text-align: center; color: var(--primary-color);">&#10003;</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div style="max-width: 600px; margin: 3rem auto 0;">
+                <div style="background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden;">
+                    <!-- Header -->
+                    <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); padding: 1.25rem 1.5rem;">
+                        <span style="color: white; font-weight: 600; font-size: 0.95rem;"></span>
+                        <span style="color: rgba(255,255,255,0.85); font-weight: 500; text-align: center; font-size: 0.95rem;">Free</span>
+                        <span style="color: white; font-weight: 600; text-align: center; font-size: 0.95rem; background: var(--accent-color); margin: -0.5rem -1.5rem -0.5rem 0; padding: 0.5rem; border-radius: 8px 0 0 8px;">Premium</span>
+                    </div>
+                    <!-- Rows -->
+                    <div style="padding: 0.5rem 0;">
+                        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; padding: 1rem 1.5rem; align-items: center;">
+                            <span style="color: var(--text-color); font-size: 0.9rem;">Daily Scans</span>
+                            <span style="text-align: center; color: var(--text-light); font-size: 0.9rem;">Up to 15</span>
+                            <span style="text-align: center; color: var(--primary-color); font-weight: 600; font-size: 0.9rem;">Unlimited</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; padding: 1rem 1.5rem; align-items: center; background: var(--bg-light);">
+                            <span style="color: var(--text-color); font-size: 0.9rem;">Tracked Items</span>
+                            <span style="text-align: center; color: var(--text-light); font-size: 0.9rem;">1</span>
+                            <span style="text-align: center; color: var(--primary-color); font-weight: 600; font-size: 0.9rem;">20</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; padding: 1rem 1.5rem; align-items: center;">
+                            <span style="color: var(--text-color); font-size: 0.9rem;">Price Comparison</span>
+                            <span style="text-align: center; font-size: 1.1rem; color: var(--primary-color);">&#10003;</span>
+                            <span style="text-align: center; font-size: 1.1rem; color: var(--primary-color);">&#10003;</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; padding: 1rem 1.5rem; align-items: center; background: var(--bg-light);">
+                            <span style="color: var(--text-color); font-size: 0.9rem;">Ad-Free Experience</span>
+                            <span style="text-align: center; font-size: 1rem; color: #ccc;">—</span>
+                            <span style="text-align: center; font-size: 1.1rem; color: var(--primary-color);">&#10003;</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; padding: 1rem 1.5rem; align-items: center;">
+                            <span style="color: var(--text-color); font-size: 0.9rem;">Priority Support</span>
+                            <span style="text-align: center; font-size: 1rem; color: #ccc;">—</span>
+                            <span style="text-align: center; font-size: 1.1rem; color: var(--primary-color);">&#10003;</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
